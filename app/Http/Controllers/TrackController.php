@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Track;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Inertia\Inertia;
 
 class TrackController extends Controller
@@ -28,20 +29,23 @@ class TrackController extends Controller
             'title' => ['required', 'string', 'min:5', 'max:255'],
             'artist' => ['required', 'string', 'min:5', 'max:50'],
             'display' => ['required', 'boolean'],
-            'image' => ['nullable', 'file', 'image'],
+            'image' => ['nullable', 'file', 'extensions:jpg,pged,png,svg'],
             'music' => ['required', 'file', 'extensions:mp3,wav']
         ]);
 
+        $uuid = Str::uuid();
+        $musicPath = $request->music->storeAs('tracks/musics', $uuid . '.' . $request->music->extension());
+        $imagePath = $request->image?->storeAs('tracks/images', $uuid . '.' . $request->image->extension());
+
         Track::create([
+            'uuid' => $uuid,
             'title' => $request->title,
             'artist' => $request->artist,
             'display' => $request->display,
+            'music' => $musicPath,
+            'image' => $imagePath,
         ]);
 
-        // $track = new Track();
-        // $track->title = $request->title;
-        // $track->artist = $request->artist;
-        // $track->display = $request->display;
-        // $track->save();
+        return redirect()->route('tracks.index');
     }
 }

@@ -14,14 +14,17 @@
     </template>
 
     <template #content>
+      <input v-model="filter" type="text" name="filter" id="filter" placeholder="Rechercher..."
+        class="shadow border rounded py-2 px-3 text-gray-700 appearance-none leading-tight focus:outline-none focus:shadow-outline mb-2">
+
       <div class="grid grid-cols-4 gap-4">
-        <Track v-for="track in tracks" :key="track.uuid" :track="track" />
+        <Track v-for="track in filteredTracks" :key="track.uuid" :track="track" />
       </div>
     </template>
   </MusicLayout>
 </template>
 
-<script lang="ts">
+<script>
 import { Head, Link } from '@inertiajs/vue3';
 import MusicLayout from '@/layouts/MusicLayout.vue';
 import Track from '@/components/Track.vue';
@@ -37,5 +40,18 @@ export default {
   props: {
     tracks: Array,
   },
+  data() {
+    return {
+      filter: '',
+    }
+  },
+  computed: {
+    filteredTracks() {
+      return this.tracks.filter(track =>
+        track.title.toLowerCase().includes(this.filter.toLowerCase())
+        || track.artist.toLowerCase().includes(this.filter.toLowerCase())
+      );
+    }
+  }
 }
 </script>
