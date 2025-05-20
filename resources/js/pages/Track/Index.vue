@@ -8,7 +8,9 @@
     </template>
 
     <template #action>
-      Action
+      <Link :href="route('tracks.create')">
+      Ajouter une musique
+      </Link>
     </template>
 
     <template #content>
@@ -20,7 +22,7 @@
 </template>
 
 <script lang="ts">
-import { Head } from '@inertiajs/vue3';
+import { Head, Link } from '@inertiajs/vue3';
 import MusicLayout from '@/layouts/MusicLayout.vue';
 import Track from '@/components/Track.vue';
 
@@ -30,6 +32,7 @@ export default {
     Head,
     MusicLayout,
     Track,
+    Link,
   },
   props: {
     tracks: Array,
