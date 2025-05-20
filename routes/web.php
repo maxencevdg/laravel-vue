@@ -23,4 +23,6 @@ Route::prefix('tracks')->name('tracks.')->group(function () {
     Route::get('create', [TrackController::class, 'create'])->name('create');
     Route::post('/', [TrackController::class, 'store'])->name('store');
     Route::get('{track}/edit', [TrackController::class, 'edit'])->name('edit');
+    Route::put('{track}', [TrackController::class, 'update'])->name('update');
+    Route::delete('{track}', [TrackController::class, 'destroy'])->name('destroy');
 });

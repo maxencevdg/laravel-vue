@@ -7,9 +7,15 @@
       <div class="font-bold text-xl mb-2">{{ track.title }}</div>
       <small class="text-gray-700 text-base">{{ track.artist }}</small>
     </div>
-    <Link :href="route('tracks.edit', { track: track })" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded w-full mb-1">
+    <Link :href="route('tracks.edit', { track: track })" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-6 rounded w-full mb-1">
       Modifier
     </Link>
+    <Link :href="route('tracks.destroy', { track: track })" method="delete" as="button" preserve-scroll class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-6 rounded w-full mb-1">
+      Supprimer
+    </Link>
+    <!-- <button @click="destroy" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-6 rounded w-full mb-1">
+      Supprimer
+    </button> -->
     <button @click="play" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded w-full mb-1">
       Lire
     </button>
@@ -31,6 +37,11 @@ export default {
     'play',
   ],
   methods: {
+    destroy() {
+      this.$inertia.delete(route('tracks.destroy', { track: this.track }), {
+        preserveScroll: true,
+      });
+    },
     play() {
       this.$emit('play', this.track);
     }
