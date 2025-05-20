@@ -48,4 +48,9 @@ class TrackController extends Controller
 
         return redirect()->route('tracks.index');
     }
+
+    public function edit(Track $track)
+    {
+        dd($track);
+    }
 }

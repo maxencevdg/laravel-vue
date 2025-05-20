@@ -18,7 +18,7 @@
         class="shadow border rounded py-2 px-3 text-gray-700 appearance-none leading-tight focus:outline-none focus:shadow-outline mb-2">
 
       <div class="grid grid-cols-4 gap-4">
-        <Track v-for="track in filteredTracks" :key="track.uuid" :track="track" />
+        <Track v-for="track in filteredTracks" :key="track.uuid" :track="track" @play="playTrack" />
       </div>
     </template>
   </MusicLayout>
@@ -42,6 +42,8 @@ export default {
   },
   data() {
     return {
+      audio: null,
+      currentTrack: null,
       filter: '',
     }
   },
@@ -52,6 +54,22 @@ export default {
         || track.artist.toLowerCase().includes(this.filter.toLowerCase())
       );
     }
-  }
+  },
+  methods: {
+    playTrack(track) {
+      if (! this.currentTrack) {
+        this.audio = new Audio('storage/' + track.music);
+        this.audio.play();
+      } else if (this.currentTrack === track.uuid) {
+        this.audio.paused ? this.audio.play() : this.audio.pause();
+      } else {
+        this.audio.pause();
+        this.audio.src = 'storage/' + track.music;
+        this.audio.play();
+      }
+
+      this.currentTrack = track.uuid;
+    },
+  },
 }
 </script>

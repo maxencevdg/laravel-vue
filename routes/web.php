@@ -22,4 +22,5 @@ Route::prefix('tracks')->name('tracks.')->group(function () {
     Route::get('/', [TrackController::class, 'index'])->name('index');
     Route::get('create', [TrackController::class, 'create'])->name('create');
     Route::post('/', [TrackController::class, 'store'])->name('store');
+    Route::get('{track}/edit', [TrackController::class, 'edit'])->name('edit');
 });
