@@ -7,7 +7,7 @@ use App\Http\Middleware\IsAdmin;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::get('/', function () {
+Route::get('home', function () {
     return Inertia::render('Welcome');
 })->name('home');
 
@@ -18,9 +18,9 @@ Route::get('dashboard', function () {
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';
 
-Route::get('home', [HomeController::class, 'index'])->name('test');
+Route::get('test', [HomeController::class, 'index'])->name('test');
 
-Route::prefix('tracks')->name('tracks.')->group(function () {
+Route::prefix('/')->name('tracks.')->group(function () {
     Route::get('/', [TrackController::class, 'index'])->name('index');
 
     Route::middleware(['auth', IsAdmin::class])->group(function () {

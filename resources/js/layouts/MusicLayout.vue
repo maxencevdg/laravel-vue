@@ -27,6 +27,18 @@
           </div>
           <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
             <div class="relative ml-3">
+              <Link v-if="!$page.props.auth.user" :href="route('login')"
+                class="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded py-2 px-4 me-3">
+              Se connecter
+              </Link>
+              <Link v-if="!$page.props.auth.user" :href="route('register')"
+                class="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded py-2 px-4 mr-3">
+              Créer un compte
+              </Link>
+              <Link v-if="$page.props.auth.user" :href="route('logout')" as="button" method="POST"
+                class="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded py-2 px-4 mr-3">
+              Se déconnecter
+              </Link>
             </div>
           </div>
         </div>
