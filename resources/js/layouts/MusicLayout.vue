@@ -8,7 +8,7 @@
               <Link :href="route('test')"
                 class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
               <img class="h-8 w-auto"
-                src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg"
+                src="/spotify.svg"
                 alt="Your Company">
               </Link>
             </div>
