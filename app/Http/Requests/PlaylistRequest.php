@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class TrackRequest extends FormRequest
+class PlaylistRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,11 +22,9 @@ class TrackRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required', 'string', 'min:5', 'max:255'],
-            'artist' => ['required', 'string', 'min:5', 'max:50'],
-            'display' => ['required', 'boolean'],
-            'image' => ['nullable', 'file', 'image'],
-            'music' => ['required', 'file', 'extensions:mp3,wav']
+            'title' => ['required', 'string', 'max:255'],
+            'tracks' => ['required', 'array'],
+            'tracks.*' => ['required', 'string', 'uuid'],
         ];
     }
 }
