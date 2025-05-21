@@ -17,7 +17,7 @@
       <div class="grid grid-cols-4 gap-4">
         <ul>
           <li v-for="playlist in playlists" :key="playlist.uuid">
-            {{ playlist.title }}
+            {{ playlist.title }} [{{ playlist.tracks_count }} musiques]
           </li>
         </ul>
       </div>

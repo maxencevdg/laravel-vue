@@ -21,6 +21,6 @@ class Playlist extends Model
 
     public function tracks(): BelongsToMany
     {
-        return $this->belongsToMany(Track::class)->withTimestamps();
+        return $this->belongsToMany(Track::class)->withPivot(['play_count'])->withTimestamps();
     }
 }

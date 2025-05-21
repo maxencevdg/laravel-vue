@@ -17,7 +17,11 @@ class PlaylistController extends Controller
      */
     public function index()
     {
-        $playlists = Playlist::all();
+        $playlists = Playlist::with('tracks')->get();
+
+        foreach ($playlists as $playlist) {
+            $playlist->numberOfTracks = $playlist->tracks->count();
+        }
 
         return Inertia::render('Playlist/Index', [
             'playlists' => $playlists,
