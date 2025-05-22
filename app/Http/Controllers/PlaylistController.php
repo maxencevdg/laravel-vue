@@ -99,4 +99,12 @@ class PlaylistController extends Controller
 
         return redirect()->back();
     }
+
+    public function apiIndex(Request $request)
+    {
+        $user = $request->user();
+        $playlists = Playlist::where('user_id', $user->id)->with('tracks')->get();
+
+        return response()->json($playlists);
+    }
 }
